@@ -1,4 +1,62 @@
 /*
+Given two arrays a and b write a function comp(a, b) (orcompSame(a, b)) that checks whether the two arrays have the "same" elements, with the same multiplicities (the multiplicity of a member is the number of times it appears). "Same" means, here, that the elements in b are the elements in a squared, regardless of the order.
+Examples
+Valid arrays
+
+a = [121, 144, 19, 161, 19, 144, 19, 11]  
+b = [121, 14641, 20736, 361, 25921, 361, 20736, 361]
+
+comp(a, b) returns true because in b 121 is the square of 11, 14641 is the square of 121, 20736 the square of 144, 361 the square of 19, 25921 the square of 161, and so on. It gets obvious if we write b's elements in terms of squares:
+
+a = [121, 144, 19, 161, 19, 144, 19, 11] 
+b = [11*11, 121*121, 144*144, 19*19, 161*161, 19*19, 144*144, 19*19]
+
+Invalid arrays
+
+If, for example, we change the first number to something else, comp is not returning true anymore:
+
+a = [121, 144, 19, 161, 19, 144, 19, 11]  
+b = [132, 14641, 20736, 361, 25921, 361, 20736, 361]
+
+comp(a,b) returns false because in b 132 is not the square of any number of a.
+
+a = [121, 144, 19, 161, 19, 144, 19, 11]  
+b = [121, 14641, 20736, 36100, 25921, 361, 20736, 361]
+
+comp(a,b) returns false because in b 36100 is not the square of any number of a.
+Remarks
+
+    a or b might be [] or {} (all languages except R, Shell).
+    a or b might be nil or null or None or nothing (except in C++, COBOL, Crystal, D, Dart, Elixir, Fortran, F#, Haskell, Nim, OCaml, Pascal, Perl, PowerShell, Prolog, PureScript, R, Racket, Rust, Shell, Swift).
+
+If a or b are nil (or null or None, depending on the language), the problem doesn't make sense so return false.
+*/
+
+import java.util.stream.Collectors;
+import java.util.Arrays;
+import java.util.List;
+
+public class AreSame {
+	
+	public static boolean comp(int[] a, int[] b) {
+		    if (a == null || b == null || a.length != b.length) // lets remove the disqualifying conditions first
+		      return false;
+		    List<Integer> bList = Arrays.stream(b).boxed().collect(Collectors.toList());
+		    for (int i = 0; i < a.length; i++) {// move sequentially through a and look for the matching a*a in b, if we don't find it we false return out
+		      int square = a[i]*a[i]; // could math.pow a[i],2 don't think there's a difference
+          if (!bList.contains(square)) {
+		         return false;
+		       }//could be a binary search situation, but there's no promise that these arrays are sorted, so I think its equal  
+		       else {
+		    	   bList.remove(new Integer(square)); // to make sure the n count in both is equal, we've got to remove matches from the list
+		       } 
+		    }
+		    return true;
+		}
+}
+
+
+/*
 Write a function that accepts an array of 10 integers (between 0 and 9), that returns a string of those numbers in the form of a phone number.
 */
 
