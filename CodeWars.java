@@ -32,3 +32,28 @@ public class DigitalRoot {
 			  return sum;
 	  }
 }
+
+/* look for the number of unique duplicants in a string*/
+import java.util.HashMap;
+
+public class CountingDuplicates {
+  public static int duplicateCount(String text) {
+  HashMap<Integer, Integer> countMap = new HashMap<Integer, Integer>();
+		  int dupes = 0;
+		  int value;
+		  for (int i = 0; i < text.length(); i++) {
+			  int testCase = (int)Character.toUpperCase(text.charAt(i));
+        if (countMap.containsKey(testCase)) {
+           value = countMap.get(testCase);
+		   	  countMap.put(testCase, value+1);
+           if (value+1 == 1) {
+              dupes++;
+		   	  }
+		    }
+		    else {
+		   	  	countMap.put(testCase, 0);
+              }
+	   }		    
+		  return dupes;
+	  }
+}
