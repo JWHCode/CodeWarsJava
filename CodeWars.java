@@ -72,3 +72,25 @@ public class CountingDuplicates {
    return true;
   }
 }
+
+/* return a camel case of a string, respecting the case status of the first character */
+import java.lang.StringBuilder;
+
+public class Solution {
+	static String toCamelCase(String s){
+	//Nothing Submitted, nothing to do
+    if (s.length() == 0) 
+      return "";
+    StringBuilder returnValue = new StringBuilder();
+    returnValue.append(s.charAt(0)); // first character upper/lower case handled by just appending it and starting at slot 1 instead of 0
+    for (int i = 1; i < s.length(); i++) {
+      if (s.charAt(i) != '-' && s.charAt(i) != '_') 
+        returnValue.append(s.charAt(i));
+      else {
+        returnValue.append(Character.toUpperCase(s.charAt(i+1)));
+        i++;
+      }
+    }
+    return returnValue.toString();
+  }
+}
