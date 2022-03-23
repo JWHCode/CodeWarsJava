@@ -57,3 +57,18 @@ public class CountingDuplicates {
 		  return dupes;
 	  }
 }
+
+/* check to see if the submitted string is a pangram */
+  public class PangramChecker {
+  public boolean check(String sentence){
+    if (sentence.length() < 26) 
+      return false;
+    for (char x = 'a'; x <= 'z'; x++) {
+      if (sentence.indexOf(x) != -1 || sentence.indexOf(Character.toUpperCase(x)) != -1)
+        ;
+      else 
+         return false;
+    }
+   return true;
+  }
+}
