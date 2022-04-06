@@ -78,22 +78,21 @@ import java.util.Arrays;
 import java.util.List;
 
 public class AreSame {
-	
 	public static boolean comp(int[] a, int[] b) {
-		    if (a == null || b == null || a.length != b.length) // lets remove the disqualifying conditions first
-		      return false;
-		    List<Integer> bList = Arrays.stream(b).boxed().collect(Collectors.toList());
-		    for (int i = 0; i < a.length; i++) {// move sequentially through a and look for the matching a*a in b, if we don't find it we false return out
-		      int square = a[i]*a[i]; // could math.pow a[i],2 don't think there's a difference
-          if (!bList.contains(square)) {
-		         return false;
-		       }//could be a binary search situation, but there's no promise that these arrays are sorted, so I think its equal  
-		       else {
-		    	   bList.remove(new Integer(square)); // to make sure the n count in both is equal, we've got to remove matches from the list
-		       } 
-		    }
-		    return true;
-		}
+	    if (a == null || b == null || a.length != b.length) // lets remove the disqualifying conditions first
+	      return false;
+	    List<Integer> bList = Arrays.stream(b).boxed().collect(Collectors.toList());
+	    for (int i = 0; i < a.length; i++) {// move sequentially through a and look for the matching a*a in b, if we don't find it we false return out
+	      int square = a[i]*a[i]; // could math.pow a[i],2 don't think there's a difference
+              if (!bList.contains(square)) {
+	      	return false;
+	      }//could be a binary search situation, but there's no promise that these arrays are sorted, so I think its equal  
+	      else {
+	    	  bList.remove(new Integer(square)); // to make sure the n count in both is equal, we've got to remove matches from the list
+	       } 
+	     }
+	 return true;
+	}
 }
 
 
