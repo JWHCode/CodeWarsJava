@@ -1,4 +1,42 @@
 /*
+Move the first letter of each word to the end of it, then add "ay" to the end of the word. Leave punctuation marks untouched.
+*/
+// This can be also done with regex and a replace all, like replaceAll("(\\w)(\\w*)", "$2$1ay" but the long way was more fun to think about for practice than
+// doing it all under the hood
+
+public class PigLatin {
+    public static String pigIt(String str) {
+      StringBuilder returnString = new StringBuilder();
+      String[] splitString = str.split(" ");
+      for (String word : splitString) {
+        if ((word.matches("\\w+\\.?"))) {
+          if (word.length() == 1) {  
+            returnString.append(word);
+            returnString.append("ay");
+          }
+          else {
+            returnString.append(word.substring(1,word.length()));
+            returnString.append(word.substring(0,1));
+            returnString.append("ay");
+          }
+        }
+        else {
+          if (word.length() == 1) {
+            returnString.append(word);  
+          }    
+          else {
+            returnString.append(word.substring(1,word.length()));
+            returnString.append(word.substring(0,1));
+            returnString.append("ay");
+            returnString.append(word.substring(word.length()));
+          }
+        }  
+        returnString.append(" ");
+    }
+    return returnString.toString().trim(); 
+  }
+
+/*
 You live in the city of Cartesia where all roads are laid out in a perfect grid. 
 You arrived ten minutes too early to an appointment, so you decided to take the opportunity to go for a short walk. 
 The city provides its citizens with a Walk Generating App on their phones -- everytime you press the button it sends you an array of one-letter strings representing directions to walk (eg. ['n', 's', 'w', 'e']). 
