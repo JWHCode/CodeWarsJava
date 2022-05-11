@@ -1,4 +1,151 @@
 /*
+In this kata we want to convert a string into an integer. The strings simply represent the numbers in words.
+
+Examples:
+
+    "one" => 1
+    "twenty" => 20
+    "two hundred forty-six" => 246
+    "seven hundred eighty-three thousand nine hundred and nineteen" => 783919
+
+Additional Notes:
+
+    The minimum number is "zero" (inclusively)
+    The maximum number, which must be supported is 1 million (inclusively)
+    The "and" in e.g. "one hundred and twenty-four" is optional, in some cases it's present and in others it's not
+    All tested numbers are valid, you don't need to validate them
+
+
+*/
+
+public class Parser {
+    
+    public static int parseInt(String numStr) {
+      String[] numberArray = numStr.split("-|\\s+");
+      StringBuilder numberBuilder = new StringBuilder();
+      int returnValue = 0;
+      for (String word : numberArray) {
+        int lastDigit;
+        switch (word.toLowerCase()) {
+            case "one":
+              returnValue += 1;
+              break;
+            case "two" :
+              returnValue += 2;
+              break;
+            case "three" :
+              returnValue += 3;
+              break;
+            case "four" : 
+              returnValue += 4;
+              break;
+            case "five" :
+              returnValue += 5;
+              break;
+            case "six" :
+              returnValue += 6;
+              break;
+            case "seven" :
+              returnValue += 7;
+              break;
+            case "eight" :
+              returnValue += 8;
+              break;
+            case "nine" :
+              returnValue += 9;
+              break;
+            case "ten" :
+              returnValue += 10;
+              break;
+            case "eleven" :
+              returnValue += 11;
+              break;
+            case "twelve" :
+              returnValue += 12;
+              break;
+            case "thirteen" :
+              returnValue += 13;
+              break;
+            case "fourteen" :
+              returnValue += 14;
+              break;
+            case "fifteen" :
+              returnValue += 15;
+              break;
+            case "sixteen" :
+              returnValue += 16;
+              break;
+            case "seventeen" :
+              returnValue += 17;
+              break;
+            case "eighteen" :
+              returnValue += 18;
+              break;
+            case "nineteen" :
+              returnValue += 19;
+              break;
+            case "twenty" :
+              returnValue += 20;
+              break;
+            case "thirty" :
+              returnValue += 30;
+              break;
+            case "forty" :
+              returnValue += 40;
+              break;
+            case "fifty" :
+              returnValue += 50;
+              break;
+            case "sixty" :
+              returnValue += 60;
+              break;
+            case "seventy" :
+              returnValue += 70;
+              break;
+            case "eighty" :
+              returnValue += 80;
+              break;
+            case "ninety" :
+              returnValue += 90;
+              break;
+            case "hundred" :
+              lastDigit = returnValue % 10;
+              if (returnValue > 10 && lastDigit == 0)
+                lastDigit = returnValue % 100;
+            else {
+                returnValue -= lastDigit;
+                returnValue += (lastDigit * 100);
+              }
+              break;
+            case "thousand" : 
+              lastDigit = returnValue % 10;
+            if (returnValue > 99 && lastDigit == 0) {
+                lastDigit = returnValue % 1000;
+                returnValue += (lastDigit * 1000);
+                returnValue -= lastDigit;
+              }
+            else if (returnValue > 9 && lastDigit == 0) {
+              lastDigit = returnValue % 100;
+              returnValue -= lastDigit;
+              returnValue += (lastDigit * 1000);
+            }
+            else {
+              returnValue = returnValue * 1000;
+              }
+              break;
+            case "million" :
+              returnValue = 1000000;
+            default :
+              break;
+        }
+          
+      }
+      
+      return returnValue;
+    }
+}
+
+/*
 Move the first letter of each word to the end of it, then add "ay" to the end of the word. Leave punctuation marks untouched.
 */
 // This can be also done with regex and a replace all, like replaceAll("(\\w)(\\w*)", "$2$1ay" but the long way was more fun to think about for practice than
