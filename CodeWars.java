@@ -22,7 +22,6 @@ public class Parser {
     
     public static int parseInt(String numStr) {
       String[] numberArray = numStr.split("-|\\s+");
-      StringBuilder numberBuilder = new StringBuilder();
       int returnValue = 0;
       for (String word : numberArray) {
         int lastDigit;
