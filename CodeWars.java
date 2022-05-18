@@ -1,4 +1,39 @@
 /*
+Write a function that accepts two square (NxN) matrices (two dimensional arrays), and returns the product of the two. Only square matrices will be given.
+
+How to multiply two square matrices:
+
+We are given two matrices, A and B, of size 2x2 (note: tests are not limited to 2x2). Matrix C, the solution, will be equal to the product of A and B. To fill in cell [0][0] of matrix C, you need to compute: A[0][0] * B[0][0] + A[0][1] * B[1][0].
+
+More general: To fill in cell [n][m] of matrix C, you need to first multiply the elements in the nth row of matrix A by the elements in the mth column of matrix B, then take the sum of all those products. This will give you the value for cell [m][n] in matrix C. 
+*/
+import java.util.Arrays;
+
+public class Kata {
+
+	public static int[][] matrixMultiplication(int[][] a, int[][] b) {
+   int[][] returnArray = new int[a.length][a[0].length]; 
+   int sum1,sum2 = 0;
+   int row;
+   int sumTotal[] = new int[a.length];
+   
+   for (int column = 0; column < a.length; column++) {  //for each  column of the resultant matrix, get the needed value
+     row = 0;
+     while (row < a[column].length) {  // for each row in each column, get the needed value
+       for (int x = 0; x < a.length; x++) { //multiply a[column][x] against b[x][row]
+         sum1 = a[column][x];
+         sum2 = b[x][row];
+         sumTotal[x] = sum1 * sum2;
+       }
+       returnArray[column][row] = Arrays.stream(sumTotal).sum(); // finish by summing all the multiplied coordinates
+       row++;
+      }
+   }
+		return returnArray;
+	}
+}
+
+/*
 In this kata we want to convert a string into an integer. The strings simply represent the numbers in words.
 
 Examples:
